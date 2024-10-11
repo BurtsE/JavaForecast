@@ -58,7 +58,7 @@ public class Application {
                 count++;
             }
             if (total != 0) {
-                System.out.println(String.format("Средняня температура по прогнозу за %d дней:", limit));
+                System.out.printf("Средняня температура по прогнозу за %d дней:%n", limit);
                 System.out.println(total/count);
             }
         } catch (Exception e) {
