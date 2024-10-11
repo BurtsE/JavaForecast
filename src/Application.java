@@ -15,11 +15,14 @@ public class Application {
         params[1][1] = args[1];
         int limit = 0;
         if (args.length > 2) {
-            params[2][0] = "lat";
-            params[2][1] = args[0];
+            params[2][0] = "limit";
+            params[2][1] = args[2];
             limit = Integer.parseInt(args[2]);
         }
-
+        if (limit > 11) {
+            System.out.println("Слишком большое значение limit");
+            return;
+        }
         String taskUrl = formatQuery(siteURl, params);
         String apiKey = System.getenv("YOUR_API_KEY");
         sendRequest(taskUrl, apiKey, limit);
@@ -58,7 +61,7 @@ public class Application {
                 count++;
             }
             if (total != 0) {
-                System.out.printf("Средняня температура по прогнозу за %d дней:%n", limit);
+                System.out.println("Средняня температура по прогнозу:");
                 System.out.println(total/count);
             }
         } catch (Exception e) {
