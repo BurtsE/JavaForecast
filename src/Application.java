@@ -8,11 +8,17 @@ public class Application {
     private static final String siteURl = "https://api.weather.yandex.ru/v2/forecast";
 
     public static void main(String[] args) {
-        String[][] params = new String[args.length][2];
+        String[][] params = new String[3][2];
         params[0][0] = "lat";
-        params[0][1] = args[0];
         params[1][0] = "lon";
-        params[1][1] = args[1];
+        params[0][1] = "32";
+        params[1][1] = "54";
+        if (args.length >= 1) {
+            params[0][1] = args[0];
+        }
+        if (args.length >= 2) {
+            params[1][1] = args[1];
+        }
         int limit = 0;
         if (args.length > 2) {
             params[2][0] = "limit";
@@ -22,6 +28,9 @@ public class Application {
         if (limit > 11) {
             System.out.println("Слишком большое значение limit");
             return;
+        }
+        for (int i = 0; i < params.length; i++) {
+            System.out.println(params[i][1]);
         }
         String taskUrl = formatQuery(siteURl, params);
         String apiKey = System.getenv("YOUR_API_KEY");
@@ -44,7 +53,7 @@ public class Application {
 
             System.out.println("Тело ответа:");
             System.out.print(body);
-
+            System.out.println(response.statusCode());
             //  Находим и печатаем температуру сегодня
             int temp = body.indexOf("\"temp\"");
             int start = body.indexOf(":", temp)+1;
