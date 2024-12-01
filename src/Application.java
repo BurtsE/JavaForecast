@@ -29,9 +29,6 @@ public class Application {
             System.out.println("Слишком большое значение limit");
             return;
         }
-        for (int i = 0; i < params.length; i++) {
-            System.out.println(params[i][1]);
-        }
         String taskUrl = formatQuery(siteURl, params);
         String apiKey = System.getenv("YOUR_API_KEY");
         sendRequest(taskUrl, apiKey, limit);
